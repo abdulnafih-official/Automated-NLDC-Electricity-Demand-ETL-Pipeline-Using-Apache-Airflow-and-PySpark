@@ -1,0 +1,10 @@
+# Processing
+pyspark==3.5.3
+
+# Excel reading (Spark has no native Excel reader)
+pandas>=2.1,<2.3
+openpyxl==3.1.5
+pyarrow>=14,<18
+
+# Tests
+pytest==8.3.4
