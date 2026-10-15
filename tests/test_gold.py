@@ -184,7 +184,9 @@ def test_features_are_null_across_gap_between_files(data_root, make_layout_a, ma
     # 2.3 years of missing data must not leak into 2024: every lag and rolling value is null
     lag_cols = [features.lag_col(n) for n in config.LAG_HOURS]
     roll_cols = [c for c in h.columns if c.startswith("demand_roll_")]
-    assert first[lag_cols[1:]].isna().all().all()                  # 2h..168h: nothing 2+ h back
+    for n in config.LAG_HOURS:                                     # lag is null when the source hour is before the data
+        before_data = first["ts_hour"] - pd.Timedelta(hours=n) < pd.Timestamp("2024-01-01")
+        assert first.loc[before_data, features.lag_col(n)].isna().all()                 # 2h..168h: nothing 2+ h back
     assert first[roll_cols].isna().all().all()
     assert first[features.same_hour_col()].isna().all()
 

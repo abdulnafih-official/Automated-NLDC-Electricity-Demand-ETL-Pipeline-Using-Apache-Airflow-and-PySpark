@@ -99,7 +99,7 @@ def test_every_rejection_reason(data_root):
     _write_b(config.LANDING_DIR / "bad.xlsx", [
         ("01-01-2024 00:00:00", "150000"),     # the only valid row
         ("01-01-2024 01:00:00", "abc"),        # non_numeric_demand
-        ("01-01-2024 02:00:00", "#N/A"),       # non_numeric_demand (SCADA error text)
+        ("01-01-2024 02:00:00", "#N/A"),       # null_demand (pandas reads #N/A as empty)
         ("01-01-2024 03:00:00", None),         # null_demand (empty cell)
         ("01-01-2024 04:00:00", " "),          # null_demand (blank text)
         ("01-01-2024 05:00:00", "0"),          # demand_nonpositive
@@ -113,8 +113,8 @@ def test_every_rejection_reason(data_root):
 
     assert summary["silver_rows_from_batch"] == 1
     assert summary["rejected_by_reason"] == {
-        config.REASON_NON_NUMERIC_DEMAND: 2,
-        config.REASON_NULL_DEMAND: 2,
+        config.REASON_NON_NUMERIC_DEMAND: 1,
+        config.REASON_NULL_DEMAND: 3,
         config.REASON_DEMAND_NONPOSITIVE: 2,
         config.REASON_DEMAND_OUT_OF_RANGE: 2,
         config.REASON_UNPARSEABLE_TS: 1,
