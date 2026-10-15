@@ -15,7 +15,6 @@ from src.utils import get_logger, get_spark
 
 log = get_logger(__name__)
 
-QUARANTINE_ROWS_DIR = config.QUARANTINE_DIR / "rows"
 
 
 # --------------------------------------------------------------------------- #
@@ -163,7 +162,7 @@ def run(batch_id: str = None) -> dict:
         )
 
     # 6. write this batch's quarantined rows (a retry of the same batch replaces them)
-    q_dir = QUARANTINE_ROWS_DIR / f"batch_id={run_batch_id}"
+    q_dir = config.QUARANTINE_DIR / "rows" / f"batch_id={run_batch_id}"
     shutil.rmtree(q_dir, ignore_errors=True)
     if rejected_all.count() > 0:
         rejected_all.coalesce(1).write.mode("overwrite").parquet(str(q_dir))
