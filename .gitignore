@@ -1,6 +1,29 @@
-data/*
-!data/**/.gitkeep
-__pycache__/
+# Virtual environment
 .venv/
-*.pyc
+
+# Secrets / local env (holds AIRFLOW_UID)
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+
+# Data volume: ignore everything, but keep the folder skeleton via .gitkeep
+data/**
+!data/**/
+!data/**/.gitkeep
+
+# Airflow and Spark runtime artifacts
+logs/
+airflow.db
+spark-warehouse/
+metastore_db/
+derby.log
+*.crc
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
