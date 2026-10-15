@@ -100,5 +100,6 @@ def get_spark() -> SparkSession:
         .config("spark.sql.sources.partitionColumnTypeInference.enabled", "false")
         .config("spark.sql.shuffle.partitions", str(config.SPARK_SHUFFLE_PARTITIONS))
         .config("spark.ui.enabled", "false")
+        .config("spark.jars.ivy", "/tmp/.ivy2")
         .getOrCreate()
     )
