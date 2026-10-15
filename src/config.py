@@ -91,6 +91,8 @@ REASON_NON_NUMERIC_DEMAND = "non_numeric_demand"
 REASON_NULL_DEMAND = "null_demand"
 REASON_DEMAND_NONPOSITIVE = "demand_nonpositive"
 REASON_DEMAND_OUT_OF_RANGE = "demand_out_of_range"
+REASON_UNREADABLE_FILE = "unreadable_file"
+REASON_MISSING_COLUMNS = "missing_columns"
 
 # --------------------------------------------------------------------------- #
 # Validation thresholds
