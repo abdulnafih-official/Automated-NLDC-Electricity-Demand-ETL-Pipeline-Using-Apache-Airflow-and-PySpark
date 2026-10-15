@@ -97,6 +97,7 @@ def get_spark() -> SparkSession:
         .config("spark.sql.session.timeZone", tz)
         .config("spark.driver.extraJavaOptions", f"-Duser.timezone={tz}")
         .config("spark.sql.sources.partitionOverwriteMode", "dynamic")
+        .config("spark.sql.sources.partitionColumnTypeInference.enabled", "false")
         .config("spark.sql.shuffle.partitions", str(config.SPARK_SHUFFLE_PARTITIONS))
         .config("spark.ui.enabled", "false")
         .getOrCreate()
