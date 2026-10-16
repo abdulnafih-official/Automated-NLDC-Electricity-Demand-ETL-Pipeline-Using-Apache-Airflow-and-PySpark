@@ -2,7 +2,7 @@
 
 A local, Dockerized, daily batch ETL pipeline. It reads raw **NLDC Excel** files, runs them through a **medallion architecture** (bronze, silver, gold) and publishes a feature-engineered **hourly demand table** as Parquet. **Apache Airflow** runs it once a day and **PySpark** does the processing.
 
-Everything runs locally in Docker, with no cloud services. All timestamps are **IST (Asia/Kolkata)**, with no UTC conversion anywhere.
+Everything runs locally in Docker. All timestamps are **IST (Asia/Kolkata)**.
 
 ## What it does
 
